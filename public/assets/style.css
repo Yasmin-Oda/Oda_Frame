@@ -1,0 +1,191 @@
+@font-face {
+  font-family: Dm Sans;
+  src: url(fonts/DMSans-VariableFont_opsz\,wght.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Dm Sans;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo img {
+  height: 70px;
+  display: block;
+  margin: 0 auto;
+}
+
+.links a {
+  margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  margin: 0 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.links a:hover {
+  color: gray;
+}
+
+.banner {
+  position: relative;
+  height: 100vh;
+  background-image: url("imgs/Banner.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fundo-banner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.texto-banner {
+  position: absolute;
+  top: 40%;
+  left: 80px;
+  transform: translateY(-50%); /* Centralizar o texto*/
+}
+
+.texto-banner h2 {
+  font-size: 52px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.texto-banner p {
+  margin-top: 10px;
+  color: #ddd;
+  font-size: 22px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+/* SOBRE NÓS */
+.sobre {
+  padding: 50px;
+  text-align: center;
+}
+
+.titulo-sobre-nos h2 {
+  display: inline-block;
+  margin: 0 15px;
+  font-size: 40px;
+}
+
+.titulo-sobre-nos hr {
+  width: 400px;
+  display: inline-block;
+  border: 2px solid #555;
+}
+
+/* CARDS */
+.card-sobre-nos {
+  background-color: #ddd;
+  color: black;
+  padding: 55px;
+  width: 70%;
+  margin: auto;
+  border-radius: 10px;
+  text-align: left;
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.cards-informacoes {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin: 50px;
+  flex-wrap: wrap;
+}
+
+.card-giratorio {
+  width: 400px;
+  height: 480px;
+  perspective: 1000px; /* cria efeito 3D na rotação */
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s; /* animação na rotação do card */
+  transform-style: preserve-3d; /* a caixa continua sendo uma caixa 3D */
+}
+
+.card-giratorio:hover .card-inner {
+  transform: rotateY(180deg); /* gira o card */
+}
+
+.card-frente, .card-verso {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden; /* Texto do lado correto */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+.card-frente img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-verso {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg); /* gira o card */
+  padding: 20px;
+  text-align: center;
+}
+
+/* GALERIA */
+.titulo-galeria {
+  text-align: center;
+  margin-top: 200px;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 40px;
+  padding: 40px;
+}
+
+.galeria img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* sombra ao redor dos cards */
+}
+
+.galeria img:hover {
+  transform: scale(1.05); /* efeito ao passar o mouse */
+}
