@@ -93,24 +93,24 @@ body {
 }
 
 .titulo-sobre-nos hr {
-  width: 400px;
+  width: 480px;
   display: inline-block;
   border: 2px solid #555;
 }
 
-/* CARDS */
 .card-sobre-nos {
   background-color: #ddd;
   color: black;
   padding: 55px;
-  width: 70%;
+  width: 80%;
   margin: auto;
   border-radius: 10px;
-  text-align: left;
-  margin-top: 15px;
+  text-align: justify;
+  margin-top: 25px;
   font-size: 22px;
 }
 
+/* CARDS */
 .cards-informacoes {
   display: flex;
   justify-content: center;
@@ -164,10 +164,38 @@ body {
   text-align: center;
 }
 
+/* UPLOAD */
+.upload {
+  background-color: #ddd;
+  color: black;
+  padding: 30px;
+  width: 75%;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+.botao-upload {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.botao-upload:hover {
+  background-color: #333;
+}
+
 /* GALERIA */
 .titulo-galeria {
   text-align: center;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 .galeria {
@@ -188,4 +216,33 @@ body {
 
 .galeria img:hover {
   transform: scale(1.05); /* efeito ao passar o mouse */
+}
+
+.galeria img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+
+  filter: grayscale(100%); /* deixa preto e branco */
+  transition: 0.4s; /* animação suave */
+}
+
+.galeria img:hover {
+  filter: grayscale(0%); /* volta para colorido */
+}
+
+/* FOOTER */
+.footer {
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+}
+
+.footer-direitos {
+  border-top: 1px solid #333;
+  margin-top:60px;
+  padding-top: 20px;
+  font-size: 15px;
+
 }
