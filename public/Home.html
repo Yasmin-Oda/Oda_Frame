@@ -18,7 +18,7 @@
             <a href="Home.html">Home</a>
             <a href="#sobre">Sobre nós</a>
             <a href="#galeria">Galeria</a>
-            <a href="#">Dashboard</a>
+            <a href="Dashboard.html">Dashboard</a>
             <a href="Login.html">Login</a>
             <a href="Cadastro.html">Cadastre-se</a>
         </div>
@@ -171,21 +171,21 @@
     </div>
 
     <h1 class="titulo-galeria" id="galeria">Galeria</h1>
-
-    <div class="galeria">
-
+    
+    <div class="galeria" id="galeria">
         <img src="assets/imgs/araras.JPG">
-        <img src="assets/imgs/momentos12.jpg">
-        <img src="assets/imgs/esporte2.jpg">
+        <img src="assets/imgs/momentos5.jpg">
+        <img src="assets/imgs/viagem9.jpg">
         <img src="assets/imgs/viagem8.jpg">
-        <img src="assets/imgs/animal1.jpg">
+        <img src="assets/imgs/animal3.jpg">
         <img src="assets/imgs/familia1.jpg">
         <img src="assets/imgs/tucano.JPG">
         <img src="assets/imgs/momentos4.jpg">
         <img src="assets/imgs/lua.JPG">
         <img src="assets/imgs/arara.JPG">
-
     </div>
+
+        
 
 <footer class="footer">
 
@@ -195,5 +195,29 @@
 
 </footer>
 
+
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+
+        // pega todas as fotos salvas no localStorage
+        let fotos = JSON.parse(localStorage.getItem("fotos")) || [];
+
+        // percorre o vetor de fotos
+        for (let i = 0; i < fotos.length; i++) {
+
+            // cria uma nova tag <img>
+            let img = document.createElement("img");
+
+            // define a imagem (base64 salva anteriormente)
+            img.src = fotos[i].imagem;
+
+            // adiciona a imagem dentro da galeria
+            document.querySelector(".galeria").appendChild(img);
+        }
+    }
+</script>
+
+

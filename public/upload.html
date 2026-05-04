@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Foto</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <div class="menu">
+        <div class="logo">
+            <img src="assets/imgs/Logo.png" alt="Logo">
+        </div>
+
+        <div class="links">
+            <a href="Home.html">Home</a>
+            <a href="#sobre">Sobre nós</a>
+            <a href="#galeria">Galeria</a>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Login.html">Login</a>
+            <a href="Cadastro.html">Cadastre-se</a>
+        </div>
+    </div>
+    
+  <div class="upload-container">
+    <div class="fundo-banner"></div>
+
+    <div class="upload-card">
+
+        <h2>Adicionar Foto</h2>
+
+        <select id="tipo">
+            <option value="">Selecione o tipo</option>
+            <option>Amigos</option>
+            <option>Família</option>
+            <option>Viagens</option>
+            <option>Esportes</option>
+            <option>Animais</option>
+            <option>Momentos</option>
+        </select>
+        <input type="date" id="data">
+
+        <select id="emocao">
+          <option value="">Como você se sentia?</option>
+          <option>Feliz</option>
+          <option>Animado</option>
+          <option>Tranquilo</option>
+          <option>Triste</option>
+          <option>Surpreso</option>
+          <option>Chateado</option>
+
+        </select>
+
+        <input class="upload-da-foto" type="file" id="foto">
+
+        <textarea id="obs" placeholder="Observação"></textarea>
+
+        <button class="upload-botao" onclick="salvarFoto()">Enviar</button>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+<script>
+function salvarFoto() {
+
+    let arquivo = document.getElementById("foto").files[0];
+    let tipo = document.getElementById("tipo").value;
+    let data = document.getElementById("data").value;
+    let local = document.getElementById("local").value;
+    let obs = document.getElementById("obs").value;
+
+    // verifica se o usuário selecionou uma imagem
+    if (!arquivo) {
+        alert("Selecione uma imagem!");
+        return;
+    }
+
+    // cria um leitor de arquivo
+    let leitor = new FileReader();
+
+    // função que roda quando a imagem termina de ser lida
+    leitor.onload = function(e) {
+
+        // transforma a imagem em texto
+        let imagemBase64 = e.target.result;
+
+        // pega as fotos já salvas no localStorage
+        let fotos = JSON.parse(localStorage.getItem("fotos")) || [];
+
+        // adiciona a nova foto no vetor
+        fotos.push({
+            tipo: tipo,
+            data: data,
+            emocao: emocao,
+            obs: obs,
+            imagem: imagemBase64
+        });
+
+        // salva novamente no localStorage
+        localStorage.setItem("fotos", JSON.stringify(fotos));
+
+        // mensagem de sucesso
+        alert("Foto enviada com sucesso!");
+
+        // redireciona para a home
+        window.location.href = "Home.html";
+    }
+
+    // inicia a leitura da imagem
+    leitor.readAsDataURL(arquivo);
+}
+</script>

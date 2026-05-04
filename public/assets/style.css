@@ -22,10 +22,11 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 10px 20px;
+  height: 130px;
 }
 
 .logo img {
-  height: 70px;
+  height: 80px;
   display: block;
   margin: 0 auto;
 }
@@ -37,6 +38,7 @@ body {
   margin: 0 35px;
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 18px;
 }
 
 .links a:hover {
@@ -45,18 +47,19 @@ body {
 
 .banner {
   position: relative;
-  height: 100vh;
-  background-image: url("imgs/Banner.jpeg");
+  height: 90vh;
+  background-image: url("imgs/Home-fundo.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  
 }
 
 .fundo-banner {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.6);
 }
 
 .texto-banner {
@@ -67,7 +70,7 @@ body {
 }
 
 .texto-banner h2 {
-  font-size: 52px;
+  font-size: 56px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
 }
@@ -75,7 +78,7 @@ body {
 .texto-banner p {
   margin-top: 10px;
   color: #ddd;
-  font-size: 22px;
+  font-size: 26px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
 }
@@ -129,7 +132,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  transition: transform 0.8s; /* animação na rotação do card */
+  transition: transform 1.5s; /* animação na rotação do card */
   transform-style: preserve-3d; /* a caixa continua sendo uma caixa 3D */
 }
 
@@ -164,33 +167,6 @@ body {
   text-align: center;
 }
 
-/* UPLOAD */
-.upload {
-  background-color: #ddd;
-  color: black;
-  padding: 30px;
-  width: 75%;
-  margin: auto;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 22px;
-}
-
-.botao-upload {
-  display: inline-block;
-  padding: 12px 25px;
-  background-color: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.botao-upload:hover {
-  background-color: #333;
-}
 
 /* GALERIA */
 .titulo-galeria {
@@ -219,11 +195,11 @@ body {
 }
 
 .galeria img {
-  width: 100%;
-  height: 100%;
+  width: 470px;
+  height: 550px;
   object-fit: cover;
   border-radius: 10px;
-
+  
   filter: grayscale(100%); /* deixa preto e branco */
   transition: 0.4s; /* animação suave */
 }
@@ -244,7 +220,7 @@ body {
   margin-top:60px;
   padding-top: 20px;
   font-size: 15px;
-
+  
 }
 
 /* TELA DE CADASTRO REUTILIZADO PARA TELA DE LOGIN */
@@ -253,8 +229,18 @@ body {
   position: relative;
   display: flex;
   height: 100vh;
+  background-image: url("imgs/fundoForm.png");
+  background-color: rgba(0,0,0,0.5);
+  background-size: cover;
+  background-position: center;
+}
 
-  background-image: url("imgs/Banner.jpeg");
+.container-validacao-cad {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background-image: url("imgs/fundo-cad.png");
+  background-color: rgba(0,0,0,0.8);
   background-size: cover;
   background-position: center;
 }
@@ -285,13 +271,17 @@ body {
 }
 
 .texto-lateral h1 {
-  font-size: 60px;
+  font-size: 65px;
   margin-bottom: 10px;
 }
 
 .texto-lateral p {
-  font-size: 22px;
+  font-size: 28px;
   margin-bottom: 30px;
+}
+
+.texto-redirecionar {
+  font-size: 18px;
 }
 
 .botao-login-cadastro {
@@ -318,11 +308,11 @@ body {
 .formulario {
   display: flex;
   flex-direction: column;
-
-  background-color: rgba(255,255,255,0.8);
-  padding: 40px;
+  
+  background-color: rgba(255,255,255,0.5);
+  padding: 60px;
   border-radius: 15px;
-  width: 500px;
+  width: 650px;
 }
 
 .formulario input {
@@ -330,16 +320,133 @@ body {
   border: none;
   border-bottom: 2px solid black;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 15px;
   background: transparent;
   outline: none;
+  font-size: 20px;
+  
+}
+
+.formulario ::placeholder {
+  color: black;
 }
 
 .formulario button {
   margin: 20px auto 0 auto;
   display: block;
-  padding: 10px 25px;
-  border-radius: 20px;
+  border-radius: 40px;
   background-color: white;
   cursor: pointer;
+  height: 45px;
+  width: 180px;
+  font-size: 18px;
+  font-weight: bold;
 }
+
+/* ALTERAÇÕES */
+/* PÁGINA DE UPLOAD */
+
+.upload-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("imgs/upload.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-container::before {
+  background-color: rgba(0,0,0,0.5);
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-card {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(206, 205, 205, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  width: 680px;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.upload-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.upload-card input,
+.upload-card select {
+  margin-bottom: 26px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.upload-card textarea {
+  height: 250px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.upload-card button {
+  width: 180px;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 40px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+.upload-card button:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+.upload-da-foto {
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 8px;
+  width: 65%;
+}
+
+.upload {
+  background-color: #ddd; 
+  color: black; 
+  padding: 30px; 
+  width: 75%; 
+  margin: auto; 
+  border-radius: 10px; 
+  text-align: center; 
+  margin-top: 10px; 
+  font-size: 22px;
+}
+
+.botao-upload { 
+  display: inline-block; 
+  padding: 12px 25px; 
+  background-color: black; 
+  color: white; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  margin-top: 20px; }
