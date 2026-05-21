@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Oda Frame</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="logo">
+            <img src="assets/imgs/Logo.png" alt="Logo">
+        </div>
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="index.html#sobre">Sobre nós</a>
+            <a href="index.html#galeria">Galeria</a>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Login.html">Login</a>
+            <a href="Cadastro.html">Cadastre-se</a>
+        </div>
+    </div>
+    
+    <div class="dash-fundo">
+        <div class="dash-card-geral">
+        
+            <div class="dash-container">
+
+                <!-- KPIs -->
+                <div class="dash-kpis">
+                    <div class="dash-kpi">
+                        <p>Tipo de foto mais comum</p>
+                        <h2 id="kpi_tipo"></h2>
+                    </div>
+                    <div class="dash-kpi">
+                        <p>Mês com mais uploads</p>
+                        <h2 id="kpi_mes"></h2>
+                    </div>
+                    <div class="dash-kpi">
+                        <p>Emoção mais frequente</p>
+                        <h2 id="kpi_emocao"></h2>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="dash-graficos">
+
+                    <div class=" dash-grafico-grande">
+                        <h3>Quantidade de upload de acordo com cada mês</h3>
+                        <canvas id="graficoMes"></canvas>
+                    </div>
+
+                    <div class="dash-grafico">
+                        <h3>Quantidade de upload por tipo</h3>
+                        <canvas id="graficoTipo"></canvas>
+                    </div>
+
+                    <div class="dash-grafico">
+                        <h3>Quantidade de cada emoção</h3>
+                        <canvas id="graficoEmocao"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script>
+    const corLinha = '#DEDEDE';
+    const coresPizza = ['#212121','#616161','#9E9E9E','#F9F4F8','#8C8271','#E1DACA'];
+
+    Chart.defaults.color = 'white';
+    Chart.defaults.borderColor = 'white';
+    Chart.defaults.font.size = 14;
+
+    const nomesMeses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+    const tiposFoto = ["Amigos", "Família", "Viagens", "Animais", "Esporte", "Momentos"];
+    const emocoes = ["Feliz", "Triste", "Surpreso", "Saudade", "Divertindo"];
+
+    function pegarMaior(labels, valores) {
+        let maior = 0;
+        let indice = 0;
+        for (let i = 0; i < valores.length; i++) {
+            if (valores[i] > maior) {
+                maior = valores[i];
+                indice = i;
+            }
+        }
+        // Se todos forem zero, retorna traço
+        return maior === 0 ? "-" : labels[indice];
+    }
+
+    // Garante que todos os meses aparecem, mesmo sem dados
+    function obterDadosGraficoMes(dados) {
+        let contagem = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (let i = 0; i < dados.length; i++) {
+            let data = new Date(dados[i].dtFoto);
+            let mes = data.getMonth();
+            contagem[mes]++;
+        }
+        return { labels: nomesMeses, valores: contagem };
+    }
+
+    // Garante que todos os tipos aparecem, mesmo sem dados
+    function obterDadosGraficoTipo(dados) {
+        let contagem = {};
+        for (let i = 0; i < tiposFoto.length; i++) {
+            contagem[tiposFoto[i]] = 0;
+        }
+        for (let i = 0; i < dados.length; i++) {
+            if (contagem[dados[i].tipoFoto] !== undefined) {
+                contagem[dados[i].tipoFoto] = dados[i].quantidade;
+            }
+        }
+        return {
+            labels: tiposFoto,
+            valores: tiposFoto.map(t => contagem[t])
+        };
+    }
+
+    // Garante que todas as emoções aparecem, mesmo sem dados
+    function obterDadosGraficoEmocao(dados) {
+        let contagem = {};
+        for (let i = 0; i < emocoes.length; i++) {
+            contagem[emocoes[i]] = 0;
+        }
+        for (let i = 0; i < dados.length; i++) {
+            if (contagem[dados[i].sentimento] !== undefined) {
+                contagem[dados[i].sentimento] = dados[i].quantidade;
+            }
+        }
+        return {
+            labels: emocoes,
+            valores: emocoes.map(e => contagem[e])
+        };
+    }
+
+    window.onload = function () {
+
+        // GRÁFICO MÊS
+        fetch("/uploads/porMes", {
+             method: "GET"
+        })
+        .then(r => r.json())
+        .then(function(dados) {
+            let resultado = obterDadosGraficoMes(dados);
+            document.getElementById("kpi_mes").innerText = pegarMaior(resultado.labels, resultado.valores);
+            new Chart(document.getElementById("graficoMes"), {
+                type: "line",
+                data: {
+                    labels: resultado.labels,
+                    datasets: [{
+                        label: "Uploads",
+                        data: resultado.valores,
+                        borderColor: corLinha,
+                        backgroundColor: "#616161",
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: corLinha,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.04)' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
+                    }
+                }
+            });
+        });
+
+        // GRÁFICO TIPO
+        fetch("/uploads/porTipo", {
+            method: "GET"
+        })
+        .then(r => r.json())
+        .then(function(dados) {
+            let resultado = obterDadosGraficoTipo(dados);
+            document.getElementById("kpi_tipo").innerText = pegarMaior(resultado.labels, resultado.valores);
+            new Chart(document.getElementById("graficoTipo"), {
+                type: "bar",
+                data: {
+                    labels: resultado.labels,
+                    datasets: [{
+                        label: "Quantidade",
+                        data: resultado.valores,
+                        backgroundColor: '#525252',
+                        borderColor: corLinha,
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
+                    }
+                }
+            });
+        });
+
+        // GRÁFICO EMOÇÃO
+        fetch("/uploads/porEmocao", {
+            method: "GET"
+        })
+        .then(r => r.json())
+        .then(function(dados) {
+            let resultado = obterDadosGraficoEmocao(dados);
+            document.getElementById("kpi_emocao").innerText = pegarMaior(resultado.labels, resultado.valores);
+            new Chart(document.getElementById("graficoEmocao"), {
+                type: "pie",
+                data: {
+                    labels: resultado.labels,
+                    datasets: [{
+                        data: resultado.valores,
+                        backgroundColor: coresPizza,
+                        borderColor: 'rgba(13, 15, 20, 0.8)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 7, usePointStyle: true, pointStyleWidth: 8, boxWidth: 8, boxHeight: 8 }
+                        }
+                    }
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,575 @@
+@font-face {
+  font-family: Dm Sans;
+  src: url(fonts/DMSans-VariableFont_opsz\,wght.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Dm Sans;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  height: 130px;
+}
+
+.logo img {
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+}
+
+.links a {
+  margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  margin: 0 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.links a:hover {
+  color: gray;
+}
+
+.banner {
+  position: relative;
+  height: 90vh;
+  background-image: url("imgs/Home-fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+.fundo-banner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.texto-banner {
+  position: absolute;
+  top: 40%;
+  left: 80px;
+  transform: translateY(-50%); /* Centralizar o texto*/
+}
+
+.texto-banner h2 {
+  font-size: 56px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.texto-banner p {
+  margin-top: 10px;
+  color: #ddd;
+  font-size: 26px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+/* SOBRE NÓS */
+.sobre {
+  padding: 50px;
+  text-align: center;
+}
+
+.titulo-sobre-nos h2 {
+  display: inline-block;
+  margin: 0 15px;
+  font-size: 40px;
+}
+
+.titulo-sobre-nos hr {
+  width: 480px;
+  display: inline-block;
+  border: 2px solid #555;
+}
+
+.card-sobre-nos {
+  background-color: #ddd;
+  color: black;
+  padding: 55px;
+  width: 80%;
+  margin: auto;
+  border-radius: 10px;
+  text-align: justify;
+  margin-top: 25px;
+  font-size: 22px;
+}
+
+/* CARDS */
+.cards-informacoes {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin: 50px;
+  flex-wrap: wrap;
+}
+
+.card-giratorio {
+  width: 400px;
+  height: 480px;
+  perspective: 1000px; /* cria efeito 3D na rotação */
+}
+
+.card-geral {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 1.5s; /* animação na rotação do card */
+  transform-style: preserve-3d; /* a caixa continua sendo uma caixa 3D */
+}
+
+.card-giratorio:hover .card-geral {
+  transform: rotateY(180deg); /* gira o card */
+}
+
+.card-frente, .card-verso {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden; /* Texto do lado correto */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+.card-frente img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-verso {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg); /* gira o card */
+  padding: 20px;
+  text-align: center;
+}
+
+
+/* GALERIA */
+.titulo-galeria {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 40px;
+  padding: 40px;
+}
+
+.galeria img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* sombra ao redor dos cards */
+}
+
+.galeria img:hover {
+  transform: scale(1.05); /* efeito ao passar o mouse */
+}
+
+.galeria img {
+  width: 470px;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 10px;
+  
+  filter: grayscale(100%); /* deixa preto e branco */
+  transition: 0.4s; /* animação suave */
+}
+
+.galeria img:hover {
+  filter: grayscale(0%); /* volta para colorido */
+}
+
+/* FOOTER */
+.footer {
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+}
+
+.footer-direitos {
+  border-top: 1px solid #333;
+  margin-top:60px;
+  padding-top: 20px;
+  font-size: 15px;
+  
+}
+
+/* TELA DE CADASTRO REUTILIZADO PARA TELA DE LOGIN */
+
+.container-validacao {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background-image: url("imgs/fundoForm.png");
+  background-color: rgba(0,0,0,0.5);
+  background-size: cover;
+  background-position: center;
+}
+
+.container-validacao-cad {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background-image: url("imgs/fundo-cad.png");
+  background-color: rgba(0,0,0,0.8);
+  background-size: cover;
+  background-position: center;
+}
+
+.container-validacao::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* garantir que tudo fique na frente */
+.texto-lateral,
+.form {
+  position: relative;
+  z-index: 1;
+}
+
+.texto-lateral {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 80px;
+  color: white;
+  text-align: center;
+}
+
+.texto-lateral h1 {
+  font-size: 65px;
+  margin-bottom: 10px;
+}
+
+.texto-lateral p {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.texto-redirecionar {
+  font-size: 18px;
+}
+
+.botao-login-cadastro {
+  display: block;
+  margin: 10px auto 0 auto;
+  padding: 10px 25px;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  text-decoration: none;
+  width: 150px;
+  text-align: center;
+}
+
+.form {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FORMULARIO */
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  
+  background-color: rgba(255,255,255,0.5);
+  padding: 60px;
+  border-radius: 15px;
+  width: 650px;
+}
+
+.formulario input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: transparent;
+  outline: none;
+  font-size: 20px;
+  
+}
+
+.formulario ::placeholder {
+  color: black;
+}
+
+.formulario button {
+  margin: 20px auto 0 auto;
+  display: block;
+  border-radius: 40px;
+  background-color: white;
+  cursor: pointer;
+  height: 45px;
+  width: 180px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ALTERAÇÕES */
+/* PÁGINA DE UPLOAD */
+
+.upload-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("imgs/upload.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-container::before {
+  background-color: rgba(0,0,0,0.5);
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-card {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(206, 205, 205, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  width: 680px;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.upload-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.upload-card input,
+.upload-card select {
+  margin-bottom: 26px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.upload-card textarea {
+  height: 250px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.upload-card button {
+  width: 180px;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 40px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.upload-card button:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+.upload-da-foto {
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 8px;
+  width: 65%;
+}
+
+.upload {
+  background-color: #ddd; 
+  color: black; 
+  padding: 30px; 
+  width: 75%; 
+  margin: auto; 
+  border-radius: 10px; 
+  text-align: center; 
+  margin-top: 10px; 
+  font-size: 22px;
+}
+
+.botao-upload { 
+  display: inline-block; 
+  padding: 12px 25px; 
+  background-color: black; 
+  color: white; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  margin-top: 20px; 
+}
+
+
+/* PÁGINA DASHBOARD */
+.dash-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 22px
+}
+
+.dash-fundo {
+  background-image: url("imgs/Banner.png");
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+   
+}
+
+.dash-fundo::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+ 
+/* KPI's */
+.dash-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+  margin-bottom: 18px;
+}
+ 
+.dash-kpi {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 17px 30px;
+  height: 90px;
+}
+ 
+.dash-kpi p {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+ 
+.dash-kpi h2 {
+  font-size: 28px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+ 
+/* GRÁFICOS */
+.dash-graficos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+ 
+.dash-grafico {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 28px 32px;
+  width: 100%;
+  padding-top: 15px; 
+}
+ 
+.dash-grafico h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  
+}
+
+.dash-grafico-grande {
+  grid-column: span 2; /* o elemento ocupa as 2 colunas do grid */
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 32px 25px;
+  width: 100%;
+  height: 400px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+  font-size: 18px;
+  padding-top: 15px; 
+}
+
+.dash-grafico-grande canvas {
+  width: 100%;
+  height: 300px;
+}
+
+.dash-card-geral {
+  background-color: rgba(40, 40, 40, 0.75);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px auto;
+  width: 1350px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.dash-grafico canvas {
+  max-height: 280px;
+}

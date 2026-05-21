@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="validacoes.js"></script>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="logo">
+            <img src="assets/imgs/Logo.png" alt="Logo">
+        </div>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="index.html #sobre">Sobre nós</a>
+            <a href="index.html #galeria">Galeria</a>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Login.html">Login</a>
+            <a href="Cadastro.html">Cadastre-se</a>
+        </div>
+    </div>
+    
+    <div class="container-validacao">
+
+        <!-- <div class="fundo-banner"></div> -->
+
+        <div class="texto-lateral">
+            <h1>Olá novamente!</h1>
+
+            <p>
+            Faça o seu login e volte a <br>
+            contribuir com a nossa galeria.
+            </p>
+
+            <span class="texto-redirecionar">Ainda não tem conta? Faça o seu cadastro</span>
+
+            <a href="Cadastro.html" class="botao-login-cadastro">Cadastre-se</a>
+        </div>
+
+        <div class="form">
+
+            <div class="formulario">
+
+                <input type="email" id="email" placeholder="Email:">
+                <input type="password" id="senha" placeholder="Senha:">
+
+                <button onclick="validarLogin()">Login</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   
+</body>
+</html>
+
+<script>
+  function validarLogin() {
+    var emailVar = document.getElementById("email").value;
+    var senhaVar = document.getElementById("senha").value;
+
+    if (emailVar == "" || senhaVar == "") {
+      alert("Preencha todos os campos!");
+      return false;
+    }
+
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+    if (resposta.ok) {
+        // Converte a resposta para JSON para pegar o idUsuario
+        return resposta.json();
+    } else {
+        alert("Email ou senha incorretos!");
+    }
+    })
+    .then(function (dados) {
+        if (dados) {
+            // Salva o idUsuario no sessionStorage para usar no upload
+            sessionStorage.setItem("idUsuario", dados.idUsuario);
+            alert("Login realizado com sucesso!");
+            window.location.href = "upload.html";
+        }
+    })
+      .catch(function (erro) {
+        console.log("Erro: ", erro);
+        alert("Erro ao tentar fazer login!");
+      });
+  }
+</script>

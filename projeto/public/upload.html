@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Foto</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <div class="menu">
+        <div class="logo">
+            <img src="assets/imgs/Logo.png" alt="Logo">
+        </div>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="index.html #sobre">Sobre nós</a>
+            <a href="index.html #galeria">Galeria</a>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Login.html">Login</a>
+            <a href="Cadastro.html">Cadastre-se</a>
+        </div>
+    </div>
+    
+  <div class="upload-container">
+    <div class="fundo-banner"></div>
+
+    <div class="upload-card">
+
+        <h2>Adicionar Foto</h2>
+
+        <select id="tipo">
+            <option value="">Selecione o tipo</option>
+            <option>Amigos</option>
+            <option>Família</option>
+            <option>Viagens</option>
+            <option>Esporte</option>
+            <option>Animais</option>
+            <option>Momentos</option>
+        </select>
+        <input type="date" id="data">
+
+        <select id="emocao">
+          <option value="">Como você se sentia?</option>
+          <option>Feliz</option>
+          <option>Triste</option>
+          <option>Surpreso</option>
+          <option>Saudade</option>
+          <option>Divertindo</option>
+
+        </select>
+
+        <input class="upload-da-foto" type="file" id="foto">
+
+        <textarea id="obs" placeholder="Observação"></textarea>
+
+        <button class="upload-botao" onclick="salvarFoto()">Enviar</button>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+<script>
+function salvarFoto() {
+
+    // Pega os valores dos campos do formulário
+    let tipo = document.getElementById("tipo").value;
+    let data = document.getElementById("data").value;
+    let emocao = document.getElementById("emocao").value;
+    let foto = document.getElementById("foto").files[0];
+
+    // Pega o idUsuario salvo quando o usuário fez login
+    let idUsuario = sessionStorage.getItem("idUsuario");
+
+    // Verifica se o usuário selecionou uma imagem
+    if (!foto) {
+        alert("Selecione uma imagem!");
+        return;
+    }
+
+    // Permite enviar arquivo e dados de texto juntos para o servidor
+    let formData = new FormData();
+    formData.append("foto", foto);
+    formData.append("tipoFotoServer", tipo);
+    formData.append("dtFotoServer", data);
+    formData.append("sentimentoServer", emocao);
+    formData.append("fkUsuarioServer", idUsuario);
+
+    // Envia os dados para o servidor
+    fetch("/uploads/cadastrar", {
+        method: "POST",
+        body: formData
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            alert("Foto enviada com sucesso!");
+            // redireciona para a home após o upload
+            window.location.href = "index.html";
+        } else {
+            alert("Erro ao enviar a foto!");
+        }
+    })
+    .catch(function (erro) {
+        alert("Erro ao conectar com o servidor!");
+    });
+}
+</script>
+
