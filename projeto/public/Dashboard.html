@@ -183,7 +183,25 @@
         .then(r => r.json())
         .then(function(dados) {
             let resultado = obterDadosGraficoTipo(dados);
-            document.getElementById("kpi_tipo").innerText = pegarMaior(resultado.labels, resultado.valores);
+
+            let somaTipos = 0;
+            for (let i = 0; i < resultado.valores.length; i++) {
+                somaTipos = somaTipos + resultado.valores[i];
+            }
+
+            let maiorValor = 0;
+            let indiceMaior = 0;
+            for (let i = 0; i < resultado.valores.length; i++) {
+                if (resultado.valores[i] > maiorValor) {
+                    maiorValor = resultado.valores[i];
+                    indiceMaior = i;
+                }
+            }
+
+            let porcento = (maiorValor / somaTipos) * 100;
+            let porcentoArredondado = porcento.toFixed(1);
+
+            document.getElementById("kpi_tipo").innerHTML = resultado.labels[indiceMaior] + " <span style='font-size: 14px;'>(" + porcentoArredondado + "%)</span>";
             new Chart(document.getElementById("graficoTipo"), {
                 type: "bar",
                 data: {
