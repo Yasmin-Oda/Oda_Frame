@@ -21,7 +21,7 @@ A ideia surgiu da vontade de criar um espaço onde lembranças deixam de estar d
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 | Camada | Tecnologia |
 |--------|-----------|
