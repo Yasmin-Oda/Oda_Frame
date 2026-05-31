@@ -144,8 +144,8 @@
         fetch("/uploads/porMes", {
              method: "GET"
         })
-        .then(r => r.json())
-        .then(function(dados) {
+        .then(r => r.json()) // Recebe os metadados, converte o corpo da resposta de texto para objeto JS
+        .then(function(dados) { // Recebe o objeto convertido, usa os dados
             let resultado = obterDadosGraficoMes(dados);
             document.getElementById("kpi_mes").innerText = pegarMaior(resultado.labels, resultado.valores);
             new Chart(document.getElementById("graficoMes"), {
@@ -180,7 +180,7 @@
         fetch("/uploads/porTipo", {
             method: "GET"
         })
-        .then(r => r.json())
+        .then(r => r.json()) 
         .then(function(dados) {
             let resultado = obterDadosGraficoTipo(dados);
 

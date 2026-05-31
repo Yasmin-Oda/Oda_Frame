@@ -1,4 +1,3 @@
-//var uploadsModel = require("../models/uploadsModel");
 // Importa o model de uploads para acessar as funções do banco de dados
 var uploadsModel = require("../models/uploadsModel");
 

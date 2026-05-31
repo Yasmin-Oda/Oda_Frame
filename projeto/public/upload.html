@@ -67,13 +67,14 @@
 function salvarFoto() {
 
     // Pega os valores dos campos do formulário
+    // busca um elemento pelo atributo id, percorre o DOM inteiro e retorna o elemento que tiver 
     let tipo = document.getElementById("tipo").value;
     let data = document.getElementById("data").value;
     let emocao = document.getElementById("emocao").value;
     let foto = document.getElementById("foto").files[0];
 
     // Pega o idUsuario salvo quando o usuário fez login
-    let idUsuario = sessionStorage.getItem("idUsuario");
+    let idUsuario = sessionStorage.getItem("idUsuario"); 
 
     // Verifica se o usuário selecionou uma imagem
     if (!foto) {
@@ -82,6 +83,7 @@ function salvarFoto() {
     }
 
     // Permite enviar arquivo e dados de texto juntos para o servidor
+    // Adiciona um campo ao pacote que será enviado ao servidor.
     let formData = new FormData();
     formData.append("foto", foto);
     formData.append("tipoFotoServer", tipo);

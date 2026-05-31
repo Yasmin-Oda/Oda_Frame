@@ -9,7 +9,7 @@ let upload = require("../config/configUpload");
 var uploadsController = require("../controllers/uploadsController");
 
 // Define a rota POST /uploads/cadastrar
-// O upload.single('foto') intercepta o arquivo com o nome 'foto' que vem do formulário
+// Intercepta o arquivo com o nome 'foto' que vem do formulário
 // e salva na pasta antes de chegar no controller
 router.post("/cadastrar", upload.single('foto'), function (req, res) {
     uploadsController.cadastrar(req, res);
@@ -18,6 +18,7 @@ router.post("/cadastrar", upload.single('foto'), function (req, res) {
 router.get("/listar", function (req, res) {
     uploadsController.listar(req, res);
 });
+
 
 // Dashboard
 router.get("/porTipo", function (req, res) {

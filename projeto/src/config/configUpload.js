@@ -14,7 +14,7 @@ let storage = multer.diskStorage({
 
     // Define o nome que o arquivo vai ter quando for salvo
     filename: function (req, file, cb) {
-        // Pega a extensão do arquivo original (ex: jpg, png)
+        // Pega a extensão do arquivo original jpg, png
         let extensaoArquivo = file.originalname.split('.')[1];
 
         // Gera um nome aleatório para o arquivo, evitando nomes duplicados
